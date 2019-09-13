@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
+import firebase from 'firebase'
 import styles from '../contants/styles/LoginScreenStyles'
 import User from '../utils/User'
 
@@ -37,6 +38,9 @@ class LoginScreen extends React.Component {
       //--------Save User Data----------//
       await AsyncStorage.setItem('userPhone', this.state.phone)
       User.phone = this.state.phone
+      firebase.database().ref(`users/${User.phone}`).set({
+        name: this.state.name
+      })
       this.props.navigation.navigate('App');
     }
   }

@@ -16,7 +16,7 @@ static navigationOptions = {
       <View style={styles.container}>
         <Text>{User.phone}</Text>
         <TouchableOpacity onPress={this._logOut}>
-          <Text>Logout</Text>
+          <Text style={styles.btnStyle}>Logout</Text>
         </TouchableOpacity>
       </View>
     )
