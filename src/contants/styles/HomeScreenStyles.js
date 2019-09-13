@@ -4,8 +4,6 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   btnStyle: {
     color: "black",
@@ -16,5 +14,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 18
   },
+  containerItems: {
+    padding: 10,
+    borderBottomColor: '#6bc5d2',
+    borderBottomWidth: 1
+  },
+  itemStyle:{
+    fontSize: 20
+  }
 });
 export default styles
