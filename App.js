@@ -1,20 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
-import From from './components/Form';
+import React from 'react'
+import AppNativation from './src/navigations'
 
-export default function App() {
-  return (
-    <KeyboardAvoidingView style={styles.container} behavior='padding'>
-      <From/>
-    </KeyboardAvoidingView>
-  );
+class App extends React.Component{
+  render(){
+    return(
+      <AppNativation/>
+    )
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
