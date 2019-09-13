@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, AsyncStorage} from 'react-native'
+import styles from '../contants/styles/HomeScreenStyles'
 import User from '../utils/User'
 
 class HomeScreen extends React.Component {
@@ -12,7 +13,7 @@ static navigationOptions = {
   }
   render(){
     return(
-      <View>
+      <View style={styles.container}>
         <Text>{User.phone}</Text>
         <TouchableOpacity onPress={this._logOut}>
           <Text>Logout</Text>
