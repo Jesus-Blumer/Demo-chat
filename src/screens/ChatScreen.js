@@ -1,8 +1,11 @@
 import React from "react";
 import {
+  KeyboardAvoidingView,
   TouchableOpacity,
   SafeAreaView,
+  Dimensions,
   TextInput,
+  FlatList,
   Text,
   View
 } from "react-native";
@@ -24,8 +27,24 @@ class ChatScreen extends React.Component {
         name: props.navigation.getParam("name"),
         phone: props.navigation.getParam("phone")
       },
-      texMessage: ""
+      texMessage: "",
+      messageList: []
     };
+  }
+
+  componentWillMount() {
+    firebase
+      .database()
+      .ref("messages")
+      .child(User.phone)
+      .child(this.state.person.phone)
+      .on("child_added", value => {
+        this.setState(prevState => {
+          return {
+            messageList: [...prevState.messageList, value.val()]
+          };
+        });
+      });
   }
 
   _handleChange = key => val => {
@@ -33,6 +52,19 @@ class ChatScreen extends React.Component {
       [key]: val
     });
   };
+
+  _convertTime = time => {
+    let a = new Date(time);
+    let b = new Date();
+    let result = (a.getHours() < 10 ? "0" : "") + a.getHours() + ":";
+    result += (a.getHours() < 10 ? "0" : "") + a.getHours();
+
+    if(b.getDay() !== b.getDay()){
+      result = a.getDay() + ' ' + a.getMonth() + ' ' + result
+    }
+    return result;
+  };
+
   _seenMessage = async () => {
     if (this.state.texMessage.length > 0) {
       let msgId = firebase
@@ -63,9 +95,34 @@ class ChatScreen extends React.Component {
     }
   };
 
+  _renderRow = ({ item }) => {
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          width: "60%",
+          alignSelf: item.from === User.phone ? "flex-end" : "flex-start",
+          backgroundColor: item.from === User.phone ? "#fcf9ea" : "#d9eeec",
+          borderRadius: 5,
+          marginBottom: 10
+        }}
+      >
+        <Text style={styles.itemMessageStyle}>{item.message}</Text>
+        <Text style={styles.itemTimeStyle}>{this._convertTime(item.time)}</Text>
+      </View>
+    );
+  };
+
   render() {
+    let { height, width } = Dimensions.get("window");
     return (
       <SafeAreaView>
+        <FlatList
+          style={{ paddin: 10, height: height * 0.8 }}
+          data={this.state.messageList}
+          renderItem={this._renderRow}
+          keyExtractor={(item, index) => index.toString()}
+        />
         <View style={styles.container}>
           <TextInput
             style={styles.textInputStyle}
@@ -73,8 +130,8 @@ class ChatScreen extends React.Component {
             onChangeText={this._handleChange("texMessage")}
             placeholder="Type message..."
           />
-          <TouchableOpacity onPress={this._seenMessage}>
-            <Text style={styles.btnStyle}>Enviar</Text>
+          <TouchableOpacity onPress={this._seenMessage} style={styles.btnStyle}>
+            <Text style={styles.btnStyleText}>Enviar</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
