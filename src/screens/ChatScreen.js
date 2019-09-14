@@ -57,10 +57,9 @@ class ChatScreen extends React.Component {
     let a = new Date(time);
     let b = new Date();
     let result = (a.getHours() < 10 ? "0" : "") + a.getHours() + ":";
-    result += (a.getHours() < 10 ? "0" : "") + a.getHours();
-
-    if(b.getDay() !== b.getDay()){
-      result = a.getDay() + ' ' + a.getMonth() + ' ' + result
+    result += (a.getMinutes() < 10 ? "0" : "") + a.getMinutes();
+    if (b.getDay() !== a.getDay()) {
+      result = a.getDay() + " " + a.getMonth() + " " + result;
     }
     return result;
   };
