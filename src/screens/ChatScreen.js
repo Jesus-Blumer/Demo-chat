@@ -117,10 +117,11 @@ class ChatScreen extends React.Component {
     return (
       <SafeAreaView>
         <FlatList
-          style={{ paddin: 10, height: height * 0.8 }}
+          style={{ paddin: 10, height: height * 0.8, marginHorizontal: 5 }}
           data={this.state.messageList}
           renderItem={this._renderRow}
           keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
         />
         <View style={styles.container}>
           <TextInput
