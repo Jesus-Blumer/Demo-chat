@@ -115,26 +115,36 @@ class ChatScreen extends React.Component {
   render() {
     let { height, width } = Dimensions.get("window");
     return (
-      <SafeAreaView>
+      <View style={{flex: 1}}>
         <FlatList
-          style={{ paddin: 10, height: height * 0.8, marginHorizontal: 5 }}
+          style={{
+            paddin: 10,
+            height: height * 0.8,
+            marginHorizontal: 5,
+            marginTop: 10
+          }}
           data={this.state.messageList}
           renderItem={this._renderRow}
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
         />
-        <View style={styles.container}>
-          <TextInput
-            style={styles.textInputStyle}
-            value={this.state.texMessages}
-            onChangeText={this._handleChange("texMessage")}
-            placeholder="Type message..."
-          />
-          <TouchableOpacity onPress={this._seenMessage} style={styles.btnStyle}>
-            <Text style={styles.btnStyleText}>Enviar</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+        <KeyboardAvoidingView behavior="padding" enabled>
+          <View style={styles.containerInput}>
+            <TextInput
+              style={styles.textInputStyle}
+              value={this.state.texMessages}
+              onChangeText={this._handleChange("texMessage")}
+              placeholder="Type message..."
+            />
+            <TouchableOpacity
+              onPress={this._seenMessage}
+              style={styles.btnStyle}
+            >
+              <Text style={styles.btnStyleText}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </View>
     );
   }
 }

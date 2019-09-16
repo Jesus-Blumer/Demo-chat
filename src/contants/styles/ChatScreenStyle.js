@@ -1,9 +1,8 @@
 import React from 'react'
 import {StyleSheet} from 'react-native'
-import User from '../../utils/User';
 
 const styles = StyleSheet.create({
-  container:{
+  containerInput:{
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 5
