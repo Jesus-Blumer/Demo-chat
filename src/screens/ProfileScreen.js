@@ -1,7 +1,8 @@
 import React from "react";
 import { 
   TouchableOpacity,
-  SafeAreaView, 
+  SafeAreaView,
+  AsyncStorage, 
   TextInput, 
   Text 
 } from "react-native";
@@ -33,6 +34,10 @@ class ProfileScreen extends React.Component {
       alert('Nombre ccambiado con exito!')
     }
   }
+  _logOut = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("Auth");
+  };
 
   render() {
     return (
@@ -45,6 +50,9 @@ class ProfileScreen extends React.Component {
         />
         <TouchableOpacity onPress={this._changeName}>
           <Text style={styles.btnStyle}>Cambiar nombre</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this._logOut}>
+          <Text style={{marginTop:25, color:'blue', fontSize:18}}>Salir</Text>
         </TouchableOpacity>
       </SafeAreaView>
     );

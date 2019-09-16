@@ -4,7 +4,6 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  AsyncStorage,
   FlatList,
   SafeAreaView
 } from "react-native";
@@ -47,12 +46,6 @@ class HomeScreen extends React.Component {
       }
     });
   }
-
-  _logOut = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate("Auth");
-  };
-
   _renderRow = ({ item }) => {
     return (
       <TouchableOpacity
