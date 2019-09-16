@@ -2,6 +2,7 @@ import React from "react";
 import {
   View,
   Text,
+  Image,
   TouchableOpacity,
   AsyncStorage,
   FlatList,
@@ -12,8 +13,18 @@ import styles from "../contants/styles/HomeScreenStyles";
 import User from "../utils/User";
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: "Chats"
+  static navigationOptions = ({navigation}) => {
+    return{
+      title: "Chats",
+      headerRight: (
+        <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+            <Image
+              style={{width:32, height:32, marginRight:7}}
+              source={require('../../assets/img/profile.png')}
+            />
+        </TouchableOpacity>
+      )
+    }
   };
 
   state = {

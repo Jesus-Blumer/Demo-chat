@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   containerItems: {
     padding: 10,
     borderBottomColor: '#6bc5d2',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   itemStyle:{
     fontSize: 20
